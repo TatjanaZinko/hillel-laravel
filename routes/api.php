@@ -1,5 +1,8 @@
 <?php
 
+
+use App\Http\Resources\Client;
+use App\Models\Client as ClientModel;
 use Illuminate\Http\Request;
 
 /*
@@ -14,7 +17,11 @@ use Illuminate\Http\Request;
 */
 
 Route::prefix('test')->group( function () {
-    Route::get('/test', 'Test\TestController@index');
+   // Route::get('/test', 'Test\TestController@index');
+    Route::get('/test', function () {
+        return ClientModel::first();
+    });
+
     Route::get('/product', 'Test\TestController@product');
     Route::get('/client', 'Test\TestController@client');
     Route::get('/order', 'Test\TestController@order');

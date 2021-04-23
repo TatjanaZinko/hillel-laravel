@@ -60,20 +60,21 @@ class TestController extends Controller
 
     public function addOrder()
     {
-//       $cart_data = array(1, 3);
+       $cart_data = array(2, 4);
+       $order_number = 'AA55555';
 //       foreach ($cart_data as $id) {
 //           $product =  Product::find($id);
 //           $price = $product -> product_price;
 //           DB::table('order_details')->insert(array(
-//               array('order_number' => 'AA12345', 'product_id' => $id, 'product_price' => $price)
+//               array('order_number' => $order_number, 'product_id' => $id, 'product_price' => $price)
 //           ));
 //       }
 
-        $order_sum = DB::table('order_details')->sum('product_price');
+        $order_sum = DB::table('order_details')->where('order_number', '==',  $order_number)->sum('product_price');
         var_export($order_sum);
 
         $order = new Myorder;
-        $order->order_number = 'AA12345';
+        $order->order_number = $order_number;
         $order->client_id = 3;
         $order->order_sum = $order_sum;
         $order->save();
